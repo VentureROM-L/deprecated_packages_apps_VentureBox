@@ -11,7 +11,7 @@ import com.venturerom.venture.widget.Card;
 public class ChangelogCard extends Card{
 
 	public ChangelogCard(Context context, AttributeSet attrs, Bundle savedInstanceState, String Title, String Changes) {
-        super(context, attrs, savedInstanceState);
+        super(context, attrs, savedInstanceState, false);
 
         setTitle(Title);
         setLayoutId(R.layout.card_changelog);

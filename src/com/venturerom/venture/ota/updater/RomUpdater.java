@@ -28,7 +28,7 @@ import com.venturerom.venture.R;
 import com.venturerom.venture.ota.Utils;
 import com.venturerom.venture.ota.Version;
 import com.venturerom.venture.ota.updater.server.GooServer;
-import com.venturerom.venture.ota.updater.server.PaServer;
+import com.venturerom.venture.ota.updater.server.VentureServer;
 
 public class RomUpdater extends Updater {
 
@@ -61,7 +61,7 @@ public class RomUpdater extends Updater {
 
     public RomUpdater(Context context, boolean fromAlarm) {
         super(context, new Server[] {
-                new PaServer(), new GooServer(context, true)
+                new VentureServer(), new GooServer(context, true)
         }, fromAlarm);
     }
 

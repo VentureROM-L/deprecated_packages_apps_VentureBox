@@ -67,7 +67,7 @@ public class InstallCard extends Card implements RequestFileCallback {
 
     public InstallCard(Context context, AttributeSet attrs, RebootHelper rebootHelper,
             Bundle savedInstanceState) {
-        super(context, attrs, savedInstanceState);
+        super(context, attrs, savedInstanceState,false);
 
         setTitle(R.string.install_title);
         setLayoutId(R.layout.card_install);

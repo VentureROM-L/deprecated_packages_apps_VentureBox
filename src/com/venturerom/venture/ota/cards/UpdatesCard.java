@@ -75,7 +75,7 @@ public class UpdatesCard extends Card implements UpdaterListener, OnCheckedChang
 
     public UpdatesCard(Context context, AttributeSet attrs, RomUpdater romUpdater,
             GappsUpdater gappsUpdater, Bundle savedInstanceState) {
-        super(context, attrs, savedInstanceState);
+        super(context, attrs, savedInstanceState,false);
 
         mRomUpdater = romUpdater;
         mRomUpdater.addUpdaterListener(this);

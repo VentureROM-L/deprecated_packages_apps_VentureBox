@@ -42,7 +42,7 @@ public abstract class Card extends LinearLayout {
     private String mExpandedProperty;
     private boolean mExpanded = false;
 
-    public Card(Context context, AttributeSet attrs, Bundle savedInstanceState) {
+    public Card(Context context, AttributeSet attrs, Bundle savedInstanceState, Boolean bar) {
         super(context, attrs);
 
         mContext = context;
@@ -62,7 +62,11 @@ public abstract class Card extends LinearLayout {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mView = inflater.inflate(R.layout.card, this, true);
+        if(bar){
+        	mView = inflater.inflate(R.layout.card_bar, this, true);
+        }else{
+        	mView = inflater.inflate(R.layout.card, this, true);
+        }
 
         mCardLayout = (LinearLayout) mView.findViewById(R.id.card_layout);
         mButton = (ImageView) mView.findViewById(R.id.headerbutton);

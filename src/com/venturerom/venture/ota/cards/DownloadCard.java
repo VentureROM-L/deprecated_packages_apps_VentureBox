@@ -52,7 +52,7 @@ public class DownloadCard extends Card implements DownloadCallback {
 
     public DownloadCard(Context context, AttributeSet attrs, PackageInfo[] infos,
             Bundle savedInstanceState) {
-        super(context, attrs, savedInstanceState);
+        super(context, attrs, savedInstanceState, false);
 
         mActivity = (MainActivity) context;
         mActivity.setDownloadCallback(this);

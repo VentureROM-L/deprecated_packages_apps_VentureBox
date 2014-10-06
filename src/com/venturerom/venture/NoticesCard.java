@@ -6,9 +6,11 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,7 @@ public class NoticesCard extends Card implements Response.Listener<JSONObject>, 
 	private RequestQueue mQueue;
 
 	public NoticesCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
-        super(context, attrs, savedInstanceState);
+        super(context, attrs, savedInstanceState, true);
 
         setTitle(R.string.updates_title);
         setLayoutId(R.layout.card_updates_notices);
@@ -46,7 +48,30 @@ public class NoticesCard extends Card implements Response.Listener<JSONObject>, 
     public void onResponse(JSONObject response) {
 		JSONArray updates;
 		try {
-			Toast.makeText(getContext(), response.getString("priority"), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getContext(), response.getString("priority"), Toast.LENGTH_SHORT).show();
+			if(response.getString("priority").equals("low")){
+				View bar = (View)findViewById(R.id.bar);
+				bar.setBackgroundColor(Color.GREEN);
+				bar = (View)findViewById(R.id.barTop);
+				bar.setBackgroundColor(Color.GREEN);
+			}
+			else if(response.getString("priority").equals("normal")){
+				View bar = (View)findViewById(R.id.bar);
+				bar.setBackgroundColor(Color.BLUE);
+				bar = (View)findViewById(R.id.barTop);
+				bar.setBackgroundColor(Color.BLUE);
+			}
+			else if(response.getString("priority").equals("warning")){
+				View bar = (View)findViewById(R.id.bar);
+				bar.setBackgroundColor(Color.YELLOW);
+				bar = (View)findViewById(R.id.barTop);
+				bar.setBackgroundColor(Color.YELLOW);
+			}else if (response.getString("priority").equals("urgent")){
+				View bar = (View)findViewById(R.id.bar);
+				bar.setBackgroundColor(Color.RED);
+				bar = (View)findViewById(R.id.barTop);
+				bar.setBackgroundColor(Color.RED);
+			}
 			updates = response.getJSONArray("data");
 			for (int i = updates.length() - 1; i >= 0; i--) {
 	            JSONObject file = updates.getJSONObject(i);
@@ -54,11 +79,10 @@ public class NoticesCard extends Card implements Response.Listener<JSONObject>, 
 	            String notice = file.optString("notice");
 	            
 	            //romView.setText(date + " " + notice);
-	            Toast.makeText(getContext(), date, Toast.LENGTH_LONG).show();
+	            //Toast.makeText(getContext(), date, Toast.LENGTH_LONG).show();
 	            
-	            String text = "<font color='red'>" + date + "</font> : <font color='blue'>" + notice + "</font>.";
 	            TextView romView = (TextView) findLayoutViewById(R.id.updateitem);
-	            romView.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
+	            romView.setText(date + " : " + notice);
 	        }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
