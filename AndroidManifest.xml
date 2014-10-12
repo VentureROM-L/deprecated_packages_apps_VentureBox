@@ -7,13 +7,13 @@
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="19" />
-    
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.REBOOT"/>  -->
+    <!-- <uses-permission android:name="android.permission.REBOOT"/> -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--  <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" /> -->
 
     <application
         android:allowBackup="true"
@@ -29,28 +29,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="com.venturerom.venture.ota.activities.SettingsActivity" >
+        <activity android:name=".ota.activities.SettingsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.venturerom.venture.MainActivity" />
         </activity>
-        
         <activity
-            android:name="com.venturerom.venture.ota.activities.SystemActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar">
+            android:name=".ota.activities.SystemActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.venturerom.venture.ota.activities.RequestFileActivity"
+        <activity
+            android:name=".ota.activities.RequestFileActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <receiver android:name="com.venturerom.venture.ota.NotificationAlarm" />
-
+        <receiver android:name=".ota.NotificationAlarm" />
         <receiver
-            android:name="com.venturerom.venture.ota.BootReceiver"
+            android:name=".ota.BootReceiver"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>
@@ -58,8 +55,7 @@
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name="com.venturerom.venture.ota.DownloadReceiver">
+        <receiver android:name=".ota.DownloadReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />

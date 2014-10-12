@@ -3,11 +3,14 @@ package com.venturerom.venture;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -33,6 +36,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.venturerom.venture.ota.IOUtils;
 import com.venturerom.venture.ota.Utils.NotificationInfo;
 import com.venturerom.venture.ota.activities.SettingsActivity;
@@ -50,10 +59,9 @@ import com.venturerom.venture.ota.updater.Updater;
 import com.venturerom.venture.ota.updater.Updater.UpdaterListener;
 import com.venturerom.venture.widget.Card;
 import com.venturerom.venture.ota.Utils;
-import com.venturerom.venture.ota.updater.Updater;
 
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
-OnItemClickListener {
+OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	
 	private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -68,7 +76,6 @@ OnItemClickListener {
     private DownloadCard mDownloadCard;
     private InstallCard mInstallCard;
     private ChangelogCard mChangelogCard;
-    private NoticesCard mNoticesCard;
     
     private static final String STATE = "STATE";
     
@@ -87,6 +94,7 @@ OnItemClickListener {
 
     private Context mContext;
     private Bundle mSavedInstanceState;
+    private RequestQueue mQueue;
 
     private int mState = STATE_HOME;
 
@@ -97,6 +105,7 @@ OnItemClickListener {
 		
 		mContext = this;
         mSavedInstanceState = savedInstanceState;
+        mQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
 
@@ -363,23 +372,22 @@ OnItemClickListener {
     public void setState(int state, boolean animate, Updater.PackageInfo[] infos,
             Uri uri, String md5, boolean isRom, boolean fromRotation) {
         mState = state;
+        JsonObjectRequest jsObjRequest;
         switch (state) {
             case STATE_HOME:
-                if (mNoticesCard == null) {
-                	mNoticesCard = new NoticesCard(mContext, null, mSavedInstanceState);
-                }
-                addCards(new Card[] {
-                		mNoticesCard
-                }, animate, true);
+            	jsObjRequest = new JsonObjectRequest(Request.Method.GET, "http://api.venturerom.com/notices/", null, this, this);
+                mQueue.add(jsObjRequest);
+                //The cards are actually add in onResponse()
                 break;
             case STATE_CHANGELOG:
+            	jsObjRequest = new JsonObjectRequest(Request.Method.GET, "http://api.venturerom.com/changelog/", null, this, this);
+                mQueue.add(jsObjRequest);
             	/*
             	if (mChangelogCard == null) {
                 	mChangelogCard = new ChangelogCard(mContext, null,mSavedInstanceState);
                 }
                 */
                 addCards(new Card[] {
-                        //mChangelogCard 
                 		new ChangelogCard(mContext, null,mSavedInstanceState, "October 2 2014", "- Change 1"),
                 		new ChangelogCard(mContext, null,mSavedInstanceState, "October 1 2014", "- Change 2"),
                 		new ChangelogCard(mContext, null,mSavedInstanceState, "October 0 2014", "- Change 3")
@@ -505,5 +513,58 @@ OnItemClickListener {
 
 	@Override
 	public void versionFound(com.venturerom.venture.ota.updater.Updater.PackageInfo[] info, boolean isRom) {
+	}
+	
+	@Override
+    public void onResponse(JSONObject response) {
+		if(response.has("notices")){
+			JSONArray updates;
+			String aPriority[];
+			String aDate[];
+			String aNotice[];
+			try {
+				int notices = Integer.parseInt(response.getString("notices"));
+				int count = 0;
+				aPriority = new String[notices];
+				aDate = new String[notices];
+				aNotice = new String[notices];
+				if(notices != 0){
+					updates = response.getJSONArray("data");
+					for (int i = updates.length() - 1; i >= 0; i--) {
+			            JSONObject file = updates.getJSONObject(i);
+			            String date = file.optString("date");
+			            String notice = file.optString("notice");
+			            String priority = file.optString("priority");
+			            aPriority[count] = priority;
+			            aDate[count] = date;
+			            aNotice[count] = notice;
+			            count++;
+			        }
+					Card[] cards = new Card[notices];
+					for(int i = 0; i < notices; i++){
+						cards[i] = new NoticesCard(mContext, null, mSavedInstanceState, aPriority[i], aDate[i], aNotice[i], false);
+					}
+					addCards(cards, true, true);
+				}else{
+					addCards(new Card[] {
+							new NoticesCard(mContext, null, mSavedInstanceState, "low", "No Date", "Empty", true)
+	                }, true, true);
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(response.has("changelog")){
+			//Add changelog code here
+		}
+		
+        
+	}
+
+	@Override
+	public void onErrorResponse(VolleyError error) {
+
 	}
 }
