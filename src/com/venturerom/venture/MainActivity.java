@@ -554,6 +554,8 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch(NumberFormatException nfe){
+				nfe.printStackTrace();
 			}
 		}
 		else if(response.has("changelog")){
