@@ -13,6 +13,9 @@
     <string name="no_additional_info">No additional information</string>
     <string name="check_for_updates">Check</string>
 
+    <!-- Notices -->
+    <string name="notice_empty">There is currently no notices.</string>
+
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
     <string name="all_up_to_date">You\'re up to date!</string>

@@ -22,7 +22,7 @@ public class NoticesCard extends Card{
         
         if(empty){
         	TextView tvNotice = (TextView) findLayoutViewById(R.id.tvNotice);
-            tvNotice.setText("Currently no notices.");
+            tvNotice.setText(res.getString(R.string.notice_empty));
         }else{
         	if(priority.equals("low")){ setColorLow(); }
     		else if(priority.equals("normal")){ setColorNormal(); }
