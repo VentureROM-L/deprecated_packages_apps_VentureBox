@@ -375,6 +375,10 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         JsonObjectRequest jsObjRequest;
         switch (state) {
             case STATE_HOME:
+            	//Add card now so it does not look broken
+            	addCards(new Card[] {
+						new NoticesCard(mContext, null, mSavedInstanceState, "low", "No Date", "Empty", true)
+                }, true, true);
             	jsObjRequest = new JsonObjectRequest(Request.Method.GET, "http://api.venturerom.com/notices/", null, this, this);
                 mQueue.add(jsObjRequest);
                 //The cards are actually add in onResponse()
@@ -545,12 +549,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 						cards[i] = new NoticesCard(mContext, null, mSavedInstanceState, aPriority[i], aDate[i], aNotice[i], false);
 					}
 					addCards(cards, true, true);
-				}else{
-					addCards(new Card[] {
-							new NoticesCard(mContext, null, mSavedInstanceState, "low", "No Date", "Empty", true)
-	                }, true, true);
 				}
-				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -570,3 +569,4 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 
 	}
 }
+
