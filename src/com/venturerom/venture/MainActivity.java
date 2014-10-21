@@ -76,14 +76,16 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private DownloadCard mDownloadCard;
     private InstallCard mInstallCard;
     private ChangelogCard mChangelogCard;
+    private ConfigCard mConfigCard;
     
     private static final String STATE = "STATE";
     
     public static final int STATE_HOME = 0;
     public static final int STATE_CHANGELOG = 1;
-    public static final int STATE_UPDATES = 2;
-    public static final int STATE_DOWNLOAD = 3;
-    public static final int STATE_INSTALL = 4;
+    public static final int STATE_CONFIG = 2;
+    public static final int STATE_UPDATES = 3;
+    public static final int STATE_DOWNLOAD = 4;
+    public static final int STATE_INSTALL = 5;
     
     private RomUpdater mRomUpdater;
     private GappsUpdater mGappsUpdater;
@@ -117,12 +119,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         List<String> itemText = new ArrayList<String>();
         itemText.add(res.getString(R.string.home));
         itemText.add(res.getString(R.string.changelog));
+        itemText.add(res.getString(R.string.config));
         itemText.add(res.getString(R.string.updates));
         itemText.add(res.getString(R.string.install));
         itemText.add(res.getString(R.string.settings));
 
         final Drawable[] icons = new Drawable[] {
-                null, null, null, null, res.getDrawable(R.drawable.ic_settings)
+                null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
@@ -253,6 +256,9 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             case STATE_CHANGELOG:
                 mChangelogCard.saveState(outState);
                 break;
+            case STATE_CONFIG:
+                mConfigCard.saveState(outState);
+                break;
             case STATE_UPDATES:
                 mSystemCard.saveState(outState);
                 mUpdatesCard.saveState(outState);
@@ -299,18 +305,24 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 setState(STATE_CHANGELOG, true, false);
                 break;
             case 2:
+                if (mState == STATE_CONFIG) {
+                    break;
+                }
+                setState(STATE_CONFIG, true, false);
+                break;
+            case 3:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
                     break;
                 }
                 setState(STATE_UPDATES, true, false);
                 break;
-            case 3:
+            case 4:
                 if (mState == STATE_INSTALL) {
                     break;
                 }
                 setState(STATE_INSTALL, true, false);
                 break;
-            case 4:
+            case 5:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -397,6 +409,15 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 		new ChangelogCard(mContext, null,mSavedInstanceState, "October 0 2014", "- Change 3")
                 }, animate, true);
                 break;
+            case STATE_CONFIG:
+            	if (mConfigCard == null) {
+                    mConfigCard = new ConfigCard(mContext, null,
+                            mSavedInstanceState);
+            	}
+		addCards(new Card[] {
+                        mConfigCard
+                }, animate, true);
+            	break;
             case STATE_UPDATES:
                 if (mSystemCard == null) {
                     mSystemCard = new SystemCard(mContext, null, mRomUpdater, mGappsUpdater,
@@ -498,6 +519,9 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 break;
             case STATE_CHANGELOG:
                 mTitle.setText(R.string.changelog);
+                break;
+	   case STATE_CONFIG:
+                mTitle.setText(R.string.config);
                 break;
             case STATE_UPDATES:
                 mTitle.setText(R.string.updates);

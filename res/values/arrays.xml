@@ -20,6 +20,12 @@
 
 <resources>
 
+    <string-array name="performance_array">
+        <item>Performance</item>
+        <item>Standard</item>
+        <item>Battery Smart</item>
+    </string-array>
+
     <!-- CHECK UPDATES FREQUENCY -->
     <string-array name="time_notifications_entries">
         <item>@string/time_notifications_never</item>

@@ -16,6 +16,11 @@
     <!-- Notices -->
     <string name="notice_empty">There is currently no notices.</string>
 
+    <!-- Config -->
+    <string name="config">Configuration</string>
+    <string name="config_kernel">Kernel</string>
+    <string name="config_performance">Performance Mode: </string>
+
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
     <string name="all_up_to_date">You\'re up to date!</string>
