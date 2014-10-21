@@ -140,7 +140,7 @@ public class Version implements Serializable {
                     version = version.substring(2);
                 }
                 if (!version.isEmpty()) {
-                    mPhaseNumber = Integer.parseInt(version);
+                    mPhaseNumber = Integer.parseInt(version.replace("R", ""));
                 }
                 mDate = split[3];
             } else {
