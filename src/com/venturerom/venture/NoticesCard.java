@@ -36,46 +36,46 @@ public class NoticesCard extends Card{
 
 	private void setColorLow() {
 		View bar = (View)findViewById(R.id.bar);
-		bar.setBackgroundColor(Color.GREEN);
+		bar.setBackgroundColor(Color.argb(0xff, 0x0f, 0x9d, 0x58));
 		bar = (View)findViewById(R.id.barTop);
-		bar.setBackgroundColor(Color.GREEN);
+		bar.setBackgroundColor(Color.argb(0xff, 0x0f, 0x9d, 0x58));
 		bar = (View)findViewById(R.id.barTop2);
-		bar.setBackgroundColor(Color.GREEN);
+		bar.setBackgroundColor(Color.argb(0xff, 0x0f, 0x9d, 0x58));
 		bar = (View)findViewById(R.id.barBottom);
-		bar.setBackgroundColor(Color.GREEN);
+		bar.setBackgroundColor(Color.argb(0xff, 0x0f, 0x9d, 0x58));
 	}
 
 	private void setColorNormal() {
 		View bar = (View)findViewById(R.id.bar);
-		bar.setBackgroundColor(Color.BLUE);
+		bar.setBackgroundColor(Color.argb(0xff, 0x03, 0xa9, 0xf4));
 		bar = (View)findViewById(R.id.barTop);
-		bar.setBackgroundColor(Color.BLUE);
+		bar.setBackgroundColor(Color.argb(0xff, 0x03, 0xa9, 0xf4));
 		bar = (View)findViewById(R.id.barTop2);
-		bar.setBackgroundColor(Color.BLUE);
+		bar.setBackgroundColor(Color.argb(0xff, 0x03, 0xa9, 0xf4));
 		bar = (View)findViewById(R.id.barBottom);
-		bar.setBackgroundColor(Color.BLUE);
+		bar.setBackgroundColor(Color.argb(0xff, 0x03, 0xa9, 0xf4));
 	}
 
 	private void setColorWarning() {
 		View bar = (View)findViewById(R.id.bar);
-		bar.setBackgroundColor(Color.YELLOW);
+		bar.setBackgroundColor(Color.argb(0xff, 0xff, 0x57, 0x22));
 		bar = (View)findViewById(R.id.barTop);
-		bar.setBackgroundColor(Color.YELLOW);
+		bar.setBackgroundColor(Color.argb(0xff, 0xff, 0x57, 0x22));
 		bar = (View)findViewById(R.id.barTop2);
-		bar.setBackgroundColor(Color.YELLOW);
+		bar.setBackgroundColor(Color.argb(0xff, 0xff, 0x57, 0x22));
 		bar = (View)findViewById(R.id.barBottom);
-		bar.setBackgroundColor(Color.YELLOW);
+		bar.setBackgroundColor(Color.argb(0xff, 0xff, 0x57, 0x22));
 	}
 
 	private void setColorUrgent() {
 		View bar = (View)findViewById(R.id.bar);
-		bar.setBackgroundColor(Color.RED);
+		bar.setBackgroundColor(Color.argb(0xff, 0xf4, 0x43, 0x46));
 		bar = (View)findViewById(R.id.barTop);
-		bar.setBackgroundColor(Color.RED);
+		bar.setBackgroundColor(Color.argb(0xff, 0xf4, 0x43, 0x46));
 		bar = (View)findViewById(R.id.barTop2);
-		bar.setBackgroundColor(Color.RED);
+		bar.setBackgroundColor(Color.argb(0xff, 0xf4, 0x43, 0x46));
 		bar = (View)findViewById(R.id.barBottom);
-		bar.setBackgroundColor(Color.RED);
+		bar.setBackgroundColor(Color.argb(0xff, 0xf4, 0x43, 0x46));
 	}
 
     @Override
