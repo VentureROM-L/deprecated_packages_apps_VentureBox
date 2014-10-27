@@ -254,7 +254,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 //mNoticesCard.saveState(outState);
                 break;
             case STATE_CHANGELOG:
-                mChangelogCard.saveState(outState);
+                //mChangelogCard.saveState(outState);
                 break;
             case STATE_CONFIG:
                 mConfigCard.saveState(outState);
