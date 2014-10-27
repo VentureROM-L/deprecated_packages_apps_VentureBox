@@ -297,32 +297,38 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                     break;
                 }
                 setState(STATE_HOME, true, false);
+                invalidateOptionsMenu();
                 break;
             case 1:
                 if (mState == STATE_CHANGELOG) {
                     break;
                 }
                 setState(STATE_CHANGELOG, true, false);
+                invalidateOptionsMenu();
                 break;
             case 2:
                 if (mState == STATE_CONFIG) {
                     break;
                 }
                 setState(STATE_CONFIG, true, false);
+                invalidateOptionsMenu();
                 break;
             case 3:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
                     break;
                 }
                 setState(STATE_UPDATES, true, false);
+                invalidateOptionsMenu();
                 break;
             case 4:
                 if (mState == STATE_INSTALL) {
                     break;
                 }
                 setState(STATE_INSTALL, true, false);
+                invalidateOptionsMenu();
                 break;
             case 5:
+            	invalidateOptionsMenu();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -367,6 +373,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+        case R.id.action_refresh:
+        	JsonObjectRequest jsObjRequest;
+        	jsObjRequest = new JsonObjectRequest(Request.Method.GET, "http://api.venturerom.com/notices/", null, this, this);
+            mQueue.add(jsObjRequest);
+            return true;
+    	}
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -535,7 +548,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		if(mState == STATE_HOME){
+			getMenuInflater().inflate(R.menu.notice, menu);
+		}else{
+			getMenuInflater().inflate(R.menu.main, menu);
+		}
 		return true;
 	}
 

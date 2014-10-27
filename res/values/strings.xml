@@ -15,6 +15,7 @@
 
     <!-- Notices -->
     <string name="notice_empty">There is currently no notices.</string>
+    <string name="action_refresh">Refresh</string>
 
     <!-- Config -->
     <string name="config">Configuration</string>
