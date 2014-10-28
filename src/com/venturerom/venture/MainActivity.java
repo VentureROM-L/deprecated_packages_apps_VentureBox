@@ -118,14 +118,12 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         Resources res = getResources();
         List<String> itemText = new ArrayList<String>();
         itemText.add(res.getString(R.string.home));
-        itemText.add(res.getString(R.string.changelog));
-        itemText.add(res.getString(R.string.config));
         itemText.add(res.getString(R.string.updates));
         itemText.add(res.getString(R.string.install));
         itemText.add(res.getString(R.string.settings));
 
         final Drawable[] icons = new Drawable[] {
-                null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
+                null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
@@ -300,34 +298,20 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 invalidateOptionsMenu();
                 break;
             case 1:
-                if (mState == STATE_CHANGELOG) {
-                    break;
-                }
-                setState(STATE_CHANGELOG, true, false);
-                invalidateOptionsMenu();
-                break;
-            case 2:
-                if (mState == STATE_CONFIG) {
-                    break;
-                }
-                setState(STATE_CONFIG, true, false);
-                invalidateOptionsMenu();
-                break;
-            case 3:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
                     break;
                 }
                 setState(STATE_UPDATES, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 4:
+            case 2:
                 if (mState == STATE_INSTALL) {
                     break;
                 }
                 setState(STATE_INSTALL, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 5:
+            case 3:
             	invalidateOptionsMenu();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
