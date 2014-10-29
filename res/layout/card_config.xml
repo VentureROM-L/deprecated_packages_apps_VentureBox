@@ -16,13 +16,22 @@
         		android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:textColor="@color/card_text"
-        		android:paddingBottom="@dimen/card_separator_padding"/>
+			android:textSize="@dimen/card_medium_text_size"/>
 
-    		<Spinner
-        		android:id="@+id/performance_spinner"
+    		<Switch
+        		android:id="@+id/performance_enable"
         		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content" />
+        		android:layout_height="wrap_content"/>
 
 	</LinearLayout>
+
+	<TextView
+        		android:id="@+id/tvPerformanceDesc"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_medium_text_size" 
+			android:text="@string/performancedesc"
+        		android:paddingBottom="@dimen/card_separator_padding"/>
 
 </LinearLayout>

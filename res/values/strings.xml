@@ -21,6 +21,7 @@
     <string name="config">Configuration</string>
     <string name="config_kernel">Kernel</string>
     <string name="config_performance">Performance Mode: </string>
+    <string name="performancedesc">"Speedy when you need it and slow when you want it.</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
