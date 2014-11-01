@@ -577,11 +577,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 			            aNotice[count] = notice;
 			            count++;
 			        }
-					Card[] cards = new Card[notices];
-					for(int i = 0; i < notices; i++){
-						cards[i] = new NoticesCard(mContext, null, mSavedInstanceState, aPriority[i], aDate[i], aNotice[i], false);
+					if(mState == STATE_HOME){
+						Card[] cards = new Card[notices];
+						for(int i = 0; i < notices; i++){
+							cards[i] = new NoticesCard(mContext, null, mSavedInstanceState, aPriority[i], aDate[i], aNotice[i], false);
+						}
+						addCards(cards, true, true);
 					}
-					addCards(cards, true, true);
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

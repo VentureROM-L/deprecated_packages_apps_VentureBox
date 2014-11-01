@@ -18,6 +18,11 @@
         		android:textColor="@color/card_text"
 			android:textSize="@dimen/card_medium_text_size"/>
 
+		<View
+            		android:layout_width="0dp"
+            		android:layout_height="0dp"
+            		android:layout_weight="1"/>           
+
     		<Switch
         		android:id="@+id/performance_enable"
         		android:layout_width="wrap_content"
