@@ -12,6 +12,9 @@
     <string name="updates_title">Updates</string>
     <string name="no_additional_info">No additional information</string>
     <string name="check_for_updates">Check</string>
+    <string name="xposedwarningTitle">Xposed Warning</string>
+    <string name="xposedwarningMessage">Xposed is not support with the ROM.</string>
+    <string name="positive_button">Okay</string>
 
     <!-- Notices -->
     <string name="notice_empty">There is currently no notices.</string>

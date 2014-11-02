@@ -9,8 +9,13 @@ import org.json.JSONObject;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -244,6 +249,29 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             if(extras.getBoolean("openUpdates")){
             	setState(STATE_UPDATES);
             }
+        }
+        
+        if(isPackageInstalled("de.robv.android.xposed.installer", MainActivity.this)){
+        	SharedPreferences prefs = getPreferences(MODE_PRIVATE); 
+        	Boolean restoredText = prefs.getBoolean("xposedWarned", false);
+        	if (!restoredText) 
+        	{
+        		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        		alertDialogBuilder.setTitle(R.string.xposedwarningTitle);
+        	    alertDialogBuilder.setMessage(R.string.xposedwarningMessage);
+        	    alertDialogBuilder.setPositiveButton(R.string.positive_button, 
+        	      new DialogInterface.OnClickListener() {
+        			
+        	         @Override
+        	         public void onClick(DialogInterface arg0, int arg1) {
+        	        	 SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        	        	 editor.putBoolean("xposedWarned", true);
+        	        	 editor.apply();
+        	         }
+        	      });
+        	      AlertDialog alertDialog = alertDialogBuilder.create();
+        	      alertDialog.show();
+        	}
         }
 	}
 	
@@ -609,6 +637,16 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	@Override
 	public void onErrorResponse(VolleyError error) {
 
+	}
+	
+	private boolean isPackageInstalled(String packagename, Context context) {
+	    PackageManager pm = context.getPackageManager();
+	    try {
+	        pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+	        return true;
+	    } catch (NameNotFoundException e) {
+	        return false;
+	    }
 	}
 }
 
