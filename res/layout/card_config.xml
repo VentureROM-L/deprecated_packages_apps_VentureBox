@@ -16,7 +16,7 @@
         		android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_medium_text_size"/>
+			android:textSize="@dimen/card_small_text_size"/>
 
 		<View
             		android:layout_width="0dp"
@@ -35,7 +35,7 @@
         		android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_medium_text_size" 
+			android:textSize="@dimen/card_small_text_size" 
 			android:text="@string/performancedesc"
         		android:paddingBottom="@dimen/card_separator_padding"/>
 
