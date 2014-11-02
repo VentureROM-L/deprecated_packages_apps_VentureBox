@@ -238,6 +238,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         if (!Utils.alarmExists(this, false)) {
             Utils.setAlarm(this, true, false);
         }
+        
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if(extras.getBoolean("openUpdates")){
+            	setState(STATE_UPDATES);
+            }
+        }
 	}
 	
 	public void setDownloadCallback(DownloadCallback downloadCallback) {
