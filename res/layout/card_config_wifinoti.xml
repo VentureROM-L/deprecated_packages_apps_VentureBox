@@ -1,0 +1,58 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/card_horizontal_margin"
+    android:paddingRight="@dimen/card_horizontal_margin">
+
+		<TextView
+        		android:id="@+id/tvWifiNotiLabel"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size"/>       
+
+    		<RadioGroup
+        		android:id="@+id/radioWifiNoti"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content" 
+			android:visibility="gone">
+ 
+			        <RadioButton
+            				android:id="@+id/radioDisabled"
+            				android:layout_width="wrap_content"
+            				android:layout_height="wrap_content"
+            				android:text="@string/wifinotidisabled"
+					android:checked="true"/>
+ 
+			        <RadioButton
+            				android:id="@+id/radioToast"
+            				android:layout_width="wrap_content"
+            				android:layout_height="wrap_content"
+            				android:text="@string/wifinotitoast"/>
+
+				<RadioButton
+            				android:id="@+id/radioNotification"
+            				android:layout_width="wrap_content"
+            				android:layout_height="wrap_content"
+            				android:text="@string/wifinotinotification"/>
+
+				<RadioButton
+            				android:id="@+id/radioNotificationSound"
+            				android:layout_width="wrap_content"
+            				android:layout_height="wrap_content"
+            				android:text="@string/wifinotinotificationsound"/>
+ 
+    		</RadioGroup>
+
+	<TextView
+        		android:id="@+id/tvWifiNotiDesc"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size" 
+			android:text="@string/wifinotidesc"
+        		android:paddingBottom="@dimen/card_separator_padding"/>
+
+</LinearLayout>

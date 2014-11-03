@@ -29,15 +29,15 @@ import android.widget.Toast;
 
 import com.venturerom.venture.widget.Card;
 
-public class ConfigCard extends Card{
+public class ConfigKernelCard extends Card{
 	
 	SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
 	
-	public ConfigCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
+	public ConfigKernelCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
         super(context, attrs, savedInstanceState, false);
 
         setTitle(R.string.config_kernel);
-        setLayoutId(R.layout.card_config);
+        setLayoutId(R.layout.card_config_kernel);
 
         Resources res = context.getResources();
         

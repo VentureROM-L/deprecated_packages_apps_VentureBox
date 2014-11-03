@@ -81,7 +81,10 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private DownloadCard mDownloadCard;
     private InstallCard mInstallCard;
     private ChangelogCard mChangelogCard;
-    private ConfigCard mConfigCard;
+    private ConfigKernelCard mConfigKernelCard;
+    private ConfigHaloCard mConfigHaloCard;
+    private ConfigCardViewCard mConfigCardViewCard;
+    private ConfigWifiNotiCard mConfigWifiNotiCard;
     
     private static final String STATE = "STATE";
     
@@ -291,7 +294,10 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 //mChangelogCard.saveState(outState);
                 break;
             case STATE_CONFIG:
-                mConfigCard.saveState(outState);
+                mConfigKernelCard.saveState(outState);
+                mConfigHaloCard.saveState(outState);
+                mConfigCardViewCard.saveState(outState);
+                mConfigWifiNotiCard.saveState(outState);
                 break;
             case STATE_UPDATES:
                 mSystemCard.saveState(outState);
@@ -450,12 +456,20 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 }, animate, true);
                 break;
             case STATE_CONFIG:
-            	if (mConfigCard == null) {
-                    mConfigCard = new ConfigCard(mContext, null,
-                            mSavedInstanceState);
+            	if (mConfigKernelCard == null) {
+                    mConfigKernelCard = new ConfigKernelCard(mContext, null,mSavedInstanceState);
             	}
-		addCards(new Card[] {
-                        mConfigCard
+            	if (mConfigHaloCard == null) {
+                    mConfigHaloCard = new ConfigHaloCard(mContext, null,mSavedInstanceState);
+            	}
+            	if (mConfigCardViewCard == null) {
+                    mConfigCardViewCard = new ConfigCardViewCard(mContext, null,mSavedInstanceState);
+            	}
+            	if (mConfigWifiNotiCard == null) {
+                    mConfigWifiNotiCard = new ConfigWifiNotiCard(mContext, null,mSavedInstanceState);
+            	}
+            	addCards(new Card[] {
+                        mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard
                 }, animate, true);
             	break;
             case STATE_UPDATES:

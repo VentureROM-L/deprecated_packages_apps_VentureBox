@@ -23,8 +23,21 @@
     <!-- Config -->
     <string name="config">Configuration</string>
     <string name="config_kernel">Kernel</string>
+    <string name="config_halo">Halo</string>
+    <string name="config_cardview">Recents Card View</string>
+    <string name="config_wifinoti">WiFi Notification</string>
     <string name="config_performance">Performance Mode: </string>
-    <string name="performancedesc">"Speedy when you need it and slow when you want it.</string>
+    <string name="performancedesc">Speedy when you need it and slow when you want it.</string>
+    <string name="halolabel">Halo: </string>
+    <string name="halodesc">Halo description.</string>
+    <string name="cardviewlabel">Card View: </string>
+    <string name="cardviewdesc">Recents Card View description.</string>
+    <string name="wifinotilabel">WiFi Notifications: </string>
+    <string name="wifinotidesc">WiFi Notifications description.</string>
+    <string name="wifinotidisabled">Disabled</string>
+    <string name="wifinotitoast">Toast</string>
+    <string name="wifinotinotification">Notification</string>
+    <string name="wifinotinotificationsound">Notification with Sound</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
