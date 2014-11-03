@@ -28,19 +28,19 @@
     <string name="config_wifinoti">WiFi Notification</string>
     <string name="config_doubletap">Double Tap</string>
     <string name="config_performance">Performance Mode: </string>
-    <string name="performancedesc">Speedy when you need it and slow when you want it.</string>
+    <string name="performancedesc">A special init.d mod that optimizes the kernel. [Disable if using other kernel mods that interfere with governors]</string>
     <string name="halolabel">Halo: </string>
-    <string name="halodesc">Halo description.</string>
+    <string name="halodesc">A super-nifty notification center extension. With halo, you can check your notifications without taking up your whole screen</string>
     <string name="cardviewlabel">Card View: </string>
-    <string name="cardviewdesc">Recents Card View description.</string>
+    <string name="cardviewdesc">A quick and easy toggle for AOSPA's new card view</string>
     <string name="wifinotilabel">WiFi Notifications: </string>
-    <string name="wifinotidesc">WiFi Notifications description.</string>
+    <string name="wifinotidesc">Get an alert every time you connect to wifi</string>
     <string name="wifinotidisabled">Disabled</string>
     <string name="wifinotitoast">Toast</string>
     <string name="wifinotinotification">Notification</string>
     <string name="wifinotinotificationsound">Notification with Sound</string>
     <string name="doubletapstatuslabel">Double Tap Statusbar to Sleep: </string>
-    <string name="doubletapdesc">Double Tap description.</string>
+    <string name="doubletapdesc">Double tap your status bar to quickly put your device to sleep</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
