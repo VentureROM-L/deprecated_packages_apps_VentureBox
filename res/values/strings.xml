@@ -26,6 +26,7 @@
     <string name="config_halo">Halo</string>
     <string name="config_cardview">Recents Card View</string>
     <string name="config_wifinoti">WiFi Notification</string>
+    <string name="config_doubletap">Double Tap</string>
     <string name="config_performance">Performance Mode: </string>
     <string name="performancedesc">Speedy when you need it and slow when you want it.</string>
     <string name="halolabel">Halo: </string>
@@ -38,6 +39,8 @@
     <string name="wifinotitoast">Toast</string>
     <string name="wifinotinotification">Notification</string>
     <string name="wifinotinotificationsound">Notification with Sound</string>
+    <string name="doubletapstatuslabel">Double Tap Statusbar to Sleep: </string>
+    <string name="doubletapdesc">Double Tap description.</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
