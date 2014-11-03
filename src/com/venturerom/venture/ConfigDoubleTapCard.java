@@ -23,6 +23,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.venturerom.venture.widget.Card;
 public class ConfigDoubleTapCard extends Card{
 	
 	final Context mContext;
+	LinearLayout llDoubleTap;
 	
 	public ConfigDoubleTapCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
         super(context, attrs, savedInstanceState, false);
@@ -41,6 +43,8 @@ public class ConfigDoubleTapCard extends Card{
 
         setTitle(R.string.config_doubletap);
         setLayoutId(R.layout.card_config_doubletap);
+        
+        llDoubleTap = (LinearLayout) findLayoutViewById(R.id.llDoubleTap);
 
         Resources res = context.getResources();
         
@@ -58,10 +62,24 @@ public class ConfigDoubleTapCard extends Card{
         TextView tvHaloLabel = (TextView) findLayoutViewById(R.id.tvdoubletapstatusLabel);
         tvHaloLabel.setText(res.getString(R.string.doubletapstatuslabel));
     }
+	
+	@Override
+    public void expand() {
+        super.expand();
+        if (llDoubleTap != null) {
+        	llDoubleTap.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void collapse() {
+        super.collapse();
+        llDoubleTap.setVisibility(View.GONE);
+    }
 
     @Override
     public boolean canExpand() {
-        return false;
+        return true;
     }
 
 }

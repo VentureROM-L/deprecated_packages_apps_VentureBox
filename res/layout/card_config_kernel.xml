@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/card_horizontal_margin"
-    android:paddingRight="@dimen/card_horizontal_margin">
+    android:paddingRight="@dimen/card_horizontal_margin"
+    android:id="@+id/llKernel"
+    android:visibility="gone">
 
 	<LinearLayout
     		android:layout_width="match_parent"

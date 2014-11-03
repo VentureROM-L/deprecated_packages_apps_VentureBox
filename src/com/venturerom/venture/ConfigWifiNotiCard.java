@@ -23,6 +23,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -36,6 +37,7 @@ public class ConfigWifiNotiCard extends Card{
 	
 	final Context mContext;
 	RadioGroup radioWifiNoti;
+	LinearLayout llWifiNoti;
 	
 	public ConfigWifiNotiCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
         super(context, attrs, savedInstanceState, false);
@@ -44,6 +46,8 @@ public class ConfigWifiNotiCard extends Card{
 
         setTitle(R.string.config_wifinoti);
         setLayoutId(R.layout.card_config_wifinoti);
+        
+        llWifiNoti = (LinearLayout) findLayoutViewById(R.id.llWifiNoti);
 
         final Resources res = context.getResources();
         
@@ -88,24 +92,20 @@ public class ConfigWifiNotiCard extends Card{
         }
         TextView tvHaloLabel = (TextView) findLayoutViewById(R.id.tvWifiNotiLabel);
         tvHaloLabel.setText(res.getString(R.string.wifinotilabel));
-        
-        if (isExpanded()) {
-        	radioWifiNoti.setVisibility(View.VISIBLE);
-        }
     }
 	
 	@Override
     public void expand() {
         super.expand();
-        if (radioWifiNoti != null) {
-        	radioWifiNoti.setVisibility(View.VISIBLE);
+        if (llWifiNoti != null) {
+        	llWifiNoti.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void collapse() {
         super.collapse();
-        radioWifiNoti.setVisibility(View.GONE);
+        llWifiNoti.setVisibility(View.GONE);
     }
 
     @Override

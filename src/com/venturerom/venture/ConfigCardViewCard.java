@@ -24,6 +24,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import com.venturerom.venture.widget.Card;
 public class ConfigCardViewCard extends Card{
 	
 	final Context mContext;
+	LinearLayout llCardView;
 	
 	public ConfigCardViewCard(Context context, AttributeSet attrs, Bundle savedInstanceState) {
         super(context, attrs, savedInstanceState, false);
@@ -42,6 +44,8 @@ public class ConfigCardViewCard extends Card{
 
         setTitle(R.string.config_cardview);
         setLayoutId(R.layout.card_config_cardview);
+        
+        llCardView = (LinearLayout) findLayoutViewById(R.id.llCardView);
 
         Resources res = context.getResources();
         
@@ -57,10 +61,24 @@ public class ConfigCardViewCard extends Card{
         TextView tvHaloLabel = (TextView) findLayoutViewById(R.id.tvCardViewLabel);
         tvHaloLabel.setText(res.getString(R.string.cardviewlabel));
     }
+	
+	@Override
+    public void expand() {
+        super.expand();
+        if (llCardView != null) {
+        	llCardView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void collapse() {
+        super.collapse();
+        llCardView.setVisibility(View.GONE);
+    }
 
     @Override
     public boolean canExpand() {
-        return false;
+        return true;
     }
 
 }
