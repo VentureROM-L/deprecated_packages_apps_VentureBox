@@ -51,11 +51,11 @@ public class ConfigDoubleTapCard extends Card{
         Switch switchEnable = (Switch) findLayoutViewById(R.id.doubletapstatus_enable);
         switchEnable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            	Settings.System.putInt(getContext().getContentResolver(), "double_tap_to_sleep", isChecked ? 1 : 0);
+            	Settings.System.putInt(getContext().getContentResolver(), "double_tap_status_bar_to_sleep", isChecked ? 1 : 0);
             }
         });
-        if(Settings.System.getString(getContext().getContentResolver(), "double_tap_to_sleep") != null){
-        	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "double_tap_to_sleep")) == 1){
+        if(Settings.System.getString(getContext().getContentResolver(), "double_tap_status_bar_to_sleep") != null){
+        	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "double_tap_status_bar_to_sleep")) == 1){
         		switchEnable.setChecked(true);
         	}
         }
