@@ -32,6 +32,30 @@
 
 	</LinearLayout>
 
+	<LinearLayout
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:orientation="horizontal">
+
+		<TextView
+        		android:id="@+id/tvdoubletapnavLabel"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size"/>
+
+		<View
+            		android:layout_width="0dp"
+            		android:layout_height="0dp"
+            		android:layout_weight="1"/>           
+
+    		<Switch
+        		android:id="@+id/doubletapnav_enable"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
 	<TextView
         		android:id="@+id/tvdoubletapDesc"
         		android:layout_width="wrap_content"

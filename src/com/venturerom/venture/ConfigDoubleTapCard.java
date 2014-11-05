@@ -48,19 +48,33 @@ public class ConfigDoubleTapCard extends Card{
 
         Resources res = context.getResources();
         
-        Switch switchEnable = (Switch) findLayoutViewById(R.id.doubletapstatus_enable);
-        switchEnable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        Switch switchdoubletapstatusEnable = (Switch) findLayoutViewById(R.id.doubletapstatus_enable);
+        switchdoubletapstatusEnable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             	Settings.System.putInt(getContext().getContentResolver(), "double_tap_status_bar_to_sleep", isChecked ? 1 : 0);
             }
         });
         if(Settings.System.getString(getContext().getContentResolver(), "double_tap_status_bar_to_sleep") != null){
         	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "double_tap_status_bar_to_sleep")) == 1){
-        		switchEnable.setChecked(true);
+        		switchdoubletapstatusEnable.setChecked(true);
         	}
         }
-        TextView tvHaloLabel = (TextView) findLayoutViewById(R.id.tvdoubletapstatusLabel);
-        tvHaloLabel.setText(res.getString(R.string.doubletapstatuslabel));
+        TextView tvDoubleTapStatusBarLabel = (TextView) findLayoutViewById(R.id.tvdoubletapstatusLabel);
+        tvDoubleTapStatusBarLabel.setText(res.getString(R.string.doubletapstatuslabel));
+        
+        Switch switchdoubletapnavEnable = (Switch) findLayoutViewById(R.id.doubletapnav_enable);
+        switchdoubletapnavEnable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            	Settings.System.putInt(getContext().getContentResolver(), "double_tap_nav_bar_to_sleep", isChecked ? 1 : 0);
+            }
+        });
+        if(Settings.System.getString(getContext().getContentResolver(), "double_tap_nav_bar_to_sleep") != null){
+        	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "double_tap_nav_bar_to_sleep")) == 1){
+        		switchdoubletapnavEnable.setChecked(true);
+        	}
+        }
+        TextView tvDoubleTapNavBarLabel = (TextView) findLayoutViewById(R.id.tvdoubletapnavLabel);
+        tvDoubleTapNavBarLabel.setText(res.getString(R.string.doubletapnavlabel));
     }
 	
 	@Override

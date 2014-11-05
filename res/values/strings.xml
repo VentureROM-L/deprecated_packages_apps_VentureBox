@@ -40,6 +40,7 @@
     <string name="wifinotinotification">Notification</string>
     <string name="wifinotinotificationsound">Notification with Sound</string>
     <string name="doubletapstatuslabel">Double Tap Statusbar to Sleep: </string>
+    <string name="doubletapnavlabel">Double Tap Navbar to Sleep: </string>
     <string name="doubletapdesc">Double tap your status bar to quickly put your device to sleep</string>
 
     <!-- SYSTEM ACTIVITY -->
