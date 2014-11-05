@@ -71,7 +71,7 @@ public class Version implements Serializable {
     public Version() {
     }
 
-    public Version(String fileName) {
+    public Version(String fileName, boolean GAPPS) {
 
         for (String remove : STATIC_REMOVE) {
             fileName = fileName.replace(remove, "");
@@ -98,58 +98,87 @@ public class Version implements Serializable {
             // malformed version
             return;
         }
+        
+        if(GAPPS){
+        	try {
+        		String version = split[1];
+        		int index = -1;
+        		if ((index = version.indexOf(".")) > 0) {
+        			mMajor = Integer.parseInt(version.substring(0, index));
+        			version = version.substring(index + 1);
+        			if (version.length() > 0) {
+        				mMinor = Integer.parseInt(version.substring(0, 1));
+        			}
+        			if (version.length() > 1) {
+        				String maintenance = version.substring(1);
+        				if (maintenance.startsWith(".")) {
+        					maintenance = maintenance.substring(1);
+        				}
+        				mMaintenance = Integer.parseInt(maintenance);
+        			}
+        		} else {
+        			mMajor = Integer.parseInt(version);
+        		}
 
-        try {
-            String version = split[1];
-            int index = -1;
-            if ((index = version.indexOf(".")) > 0) {
-                mMajor = Integer.parseInt(version.substring(0, index));
-                version = version.substring(index + 1);
-                if (version.length() > 0) {
-                    mMinor = Integer.parseInt(version.substring(0, 1));
-                }
-                if (version.length() > 1) {
-                    String maintenance = version.substring(1);
-                    if (maintenance.startsWith(".")) {
-                        maintenance = maintenance.substring(1);
-                    }
-                    mMaintenance = Integer.parseInt(maintenance);
-                }
-            } else {
-                mMajor = Integer.parseInt(version);
-            }
+        		if (!Utils.isNumeric(split[2].substring(0, 1))) {
+        			version = split[2];
+        			if (version.startsWith("A")) {
+        				mPhase = ALPHA;
+        				if (version.startsWith("ALPHA")) {
+        					version = version.substring(5);
+        				} else {
+        					version = version.substring(1);
+        				}
+        			} else if (version.startsWith("B")) {
+        				mPhase = BETA;
+        				if (version.startsWith("BETA")) {
+        					version = version.substring(4);
+        				} else {
+        					version = version.substring(1);
+        				}
+        			} else if (version.startsWith("RC")) {
+        				mPhase = RELEASE_CANDIDATE;
+        				version = version.substring(2);
+        			}
+        			if (!version.isEmpty()) {
+        				mPhaseNumber = Integer.parseInt(version.replace("R", ""));
+        			}
+        			mDate = split[3];
+        		} else {
+        			mDate = split[2];
+        		}
+        	} catch (NumberFormatException ex) {
+        		// malformed version, write the log and continue
+        		// C derped something for sure
+        		ex.printStackTrace();
+        	}
+        } else {
+        	try {
+        		String version = split[1];
+        		int index = -1;
+        		if ((index = version.indexOf(".")) > 0) {
+        			mMajor = Integer.parseInt(version.substring(0, index));
+        			version = version.substring(index + 1);
+        			if (version.length() > 0) {
+        				mMinor = Integer.parseInt(version.substring(0, 2));
+        			}
+        		} else {
+        			mMajor = Integer.parseInt(version);
+        		}
 
-            if (!Utils.isNumeric(split[2].substring(0, 1))) {
-                version = split[2];
-                if (version.startsWith("A")) {
-                    mPhase = ALPHA;
-                    if (version.startsWith("ALPHA")) {
-                        version = version.substring(5);
-                    } else {
-                        version = version.substring(1);
-                    }
-                } else if (version.startsWith("B")) {
-                    mPhase = BETA;
-                    if (version.startsWith("BETA")) {
-                        version = version.substring(4);
-                    } else {
-                        version = version.substring(1);
-                    }
-                } else if (version.startsWith("RC")) {
-                    mPhase = RELEASE_CANDIDATE;
-                    version = version.substring(2);
-                }
-                if (!version.isEmpty()) {
-                    mPhaseNumber = Integer.parseInt(version.replace("R", ""));
-                }
-                mDate = split[3];
-            } else {
-                mDate = split[2];
-            }
-        } catch (NumberFormatException ex) {
-            // malformed version, write the log and continue
-            // C derped something for sure
-            ex.printStackTrace();
+        		if (!Utils.isNumeric(split[2].substring(0, 1))) {
+        			version = split[2];
+        			mPhase = 2;
+        			mPhaseNumber = Integer.parseInt(version.replace("R", ""));
+        			mDate = split[3];
+        		} else {
+        			mDate = split[2];
+        		}
+        	} catch (NumberFormatException ex) {
+        		// malformed version, write the log and continue
+        		// C derped something for sure
+        		ex.printStackTrace();
+        	}
         }
     }
 
@@ -206,7 +235,7 @@ public class Version implements Serializable {
 
     public static Version fromGapps(String platform, String version) {
         return new Version("gapps-" + platform.substring(0, 1) + "."
-                + (platform.length() > 1 ? platform.substring(1) : "") + "-" + version);
+                + (platform.length() > 1 ? platform.substring(1) : "") + "-" + version, true);
     }
 
     public static int compare(Version v1, Version v2) {

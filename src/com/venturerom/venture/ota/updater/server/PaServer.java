@@ -65,7 +65,7 @@ public class PaServer implements Server {
                 if (!isNew) {
                     continue;
                 }
-                Version version = new Version(filename);
+                Version version = new Version(filename,  false);
                 if (Version.compare(mVersion, version) < 0) {
                     list.add(new UpdatePackage(mDevice, filename, version, file.getString("size"),
                             file.getString("url"), file.getString("md5"), false));

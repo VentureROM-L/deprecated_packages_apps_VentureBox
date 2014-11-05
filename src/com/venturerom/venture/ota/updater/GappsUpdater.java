@@ -49,7 +49,7 @@ public class GappsUpdater extends Updater {
                 new GooServer(context, false)
         }, fromAlarm);
 
-        mRomVersion = new Version(RomUpdater.getVersionString(context));
+        mRomVersion = new Version(RomUpdater.getVersionString(context), false);
 
         File file = new File(PROPERTIES_FILE);
         if (file.exists()) {

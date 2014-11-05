@@ -99,7 +99,7 @@ public class GooServer implements Server {
                         continue;
                     }
                 }
-                Version version = new Version(filename);
+                Version version = new Version(filename, true);
                 if (Version.compare(mVersion, version) < 0) {
                     list.add(new UpdatePackage(mDevice, filename, version, file
                             .getLong("filesize"), "http://goo.im"

@@ -67,7 +67,7 @@ public class RomUpdater extends Updater {
 
     @Override
     public Version getVersion() {
-        return new Version(getVersionString(getContext()));
+        return new Version(getVersionString(getContext()), false);
     }
 
     @Override
