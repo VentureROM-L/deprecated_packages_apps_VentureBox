@@ -9,36 +9,183 @@
     android:visibility="gone">
 
 	<LinearLayout
-    		android:layout_width="match_parent"
-    		android:layout_height="match_parent"
-    		android:orientation="horizontal">
+   		android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
 
 		<TextView
-        		android:id="@+id/tvHaloLabel"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_small_text_size"/>
+        	android:id="@+id/tvHaloLabel"
+        	android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+       		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_label_tv"/>
 
 		<View
-            		android:layout_width="0dp"
-            		android:layout_height="0dp"
-            		android:layout_weight="1"/>           
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+       		android:layout_weight="1"/>
 
-    		<Switch
-        		android:id="@+id/halo_enable"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"/>
+    	<Switch
+        	android:id="@+id/halo_enable"
+        	android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"/>
 
 	</LinearLayout>
 
+    <LinearLayout android:id="@+id/halo_state"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+   		android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_state_tv"/>
+
+        <Spinner android:id="@+id/halo_state_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_hide"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+   		android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloHide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_hide_tv"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch android:id="@+id/halo_hide_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_size"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+   		android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_size_tv"/>
+
+        <Spinner android:id="@+id/halo_size_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_pause"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+   		android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_pause_tv"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch android:id="@+id/halo_pause_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_msgbox"
+   		android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloMsgbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_msgbox_tv"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch android:id="@+id/halo_msgbox_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_notify_count"
+   		android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloNotifyCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_notify_count_tv"/>
+
+        <Spinner android:id="@+id/halo_notify_count_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/halo_unlock_ping"
+   		android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+
+        <TextView android:id="@+id/tvHaloUnlockPing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text"
+            android:textSize="@dimen/card_small_text_size"
+            android:text="@string/halo_unlock_ping_tv"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Switch android:id="@+id/halo_unlock_ping_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 	<TextView
-        		android:id="@+id/tvHaloDesc"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_small_text_size" 
-			android:text="@string/halodesc"
-        		android:paddingBottom="@dimen/card_separator_padding"/>
+        android:id="@+id/tvHaloDesc"
+   		android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+        android:textColor="@color/card_text"
+    	android:textSize="@dimen/card_small_text_size"
+		android:text="@string/halodesc"
+        android:paddingBottom="@dimen/card_separator_padding"/>
 
 </LinearLayout>
