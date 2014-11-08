@@ -30,7 +30,7 @@
     <string name="config_performance">Performance Mode: </string>
     <string name="performancedesc">A special init.d mod that optimizes the kernel. [Disable if using other kernel mods that interfere with governors]</string>
     <string name="halolabel">Halo: </string>
-    <string name="halodesc">A super-nifty notification center extension. With halo, you can check your notifications without taking up your whole screen</string>
+    <string name="halodesc">Halo is a super-nifty notification center extension. With halo, you can check your notifications without taking up your whole screen</string>
     <string name="halo_state_black">Blacklist</string>
     <string name="halo_state_white">Whitelist</string>
     <string name="halo_size_miniscule">Miniscule</string>
