@@ -55,8 +55,10 @@ public class ConfigCardViewCard extends Card{
             	Settings.System.putInt(getContext().getContentResolver(), "status_bar_recents_card_stack", isChecked ? 1 : 2);
             }
         });
-        if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "status_bar_recents_card_stack")) == 1){
-        	switchEnable.setChecked(true);
+        if(Settings.System.getString(getContext().getContentResolver(), "status_bar_recents_card_stack") != null){
+        	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "status_bar_recents_card_stack")) == 1){
+            	switchEnable.setChecked(true);
+            }
         }
         TextView tvHaloLabel = (TextView) findLayoutViewById(R.id.tvCardViewLabel);
         tvHaloLabel.setText(res.getString(R.string.cardviewlabel));
