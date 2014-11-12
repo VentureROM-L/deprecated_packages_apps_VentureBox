@@ -67,11 +67,11 @@ import com.venturerom.venture.ota.Utils;
 
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
 OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
-	
+
 	private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    
+
     private RecoveryHelper mRecoveryHelper;
     private RebootHelper mRebootHelper;
     private DownloadCallback mDownloadCallback;
@@ -87,16 +87,16 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ConfigWifiNotiCard mConfigWifiNotiCard;
     private ConfigDoubleTapCard mConfigDoubleTapCard;
     private ConfigNetworkTrafficCard mConfigNetworkTrafficCard;
-    
+
     private static final String STATE = "STATE";
-    
+
     public static final int STATE_HOME = 0;
     public static final int STATE_CHANGELOG = 1;
     public static final int STATE_CONFIG = 2;
     public static final int STATE_UPDATES = 3;
     public static final int STATE_DOWNLOAD = 4;
     public static final int STATE_INSTALL = 5;
-    
+
     private RomUpdater mRomUpdater;
     private GappsUpdater mGappsUpdater;
     private NotificationInfo mNotificationInfo;
@@ -114,7 +114,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		mContext = this;
         mSavedInstanceState = savedInstanceState;
         mQueue = Volley.newRequestQueue(this);
@@ -165,16 +165,16 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 TextView text = (TextView) itemView.findViewById(R.id.text);
                 TextView textSmall = (TextView) itemView.findViewById(R.id.text_small);
                 ImageView icon = (ImageView) itemView.findViewById(R.id.icon);
-                if ((position == 0 && mState == STATE_HOME)
+								if ((position == 0 && mState == STATE_HOME)
                         || (position == 1 && mState == STATE_CHANGELOG)) {
                     SpannableString spanString = new SpannableString(item);
                     spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
                     text.setText(spanString);
                     textSmall.setText(spanString);
                 } else {
-                    text.setText(item);
+								    text.setText(item);
                     textSmall.setText(item);
-                }
+                //}
                 if (icons[position] != null) {
                     icon.setImageDrawable(icons[position]);
                     text.setVisibility(View.GONE);
@@ -200,7 +200,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         Utils.setRobotoThin(mContext, findViewById(R.id.mainlayout));
-        
+
         mRecoveryHelper = new RecoveryHelper(this);
         mRebootHelper = new RebootHelper(mRecoveryHelper);
 
@@ -248,25 +248,25 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         if (!Utils.alarmExists(this, false)) {
             Utils.setAlarm(this, true, false);
         }
-        
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if(extras.getBoolean("openUpdates")){
             	setState(STATE_UPDATES);
             }
         }
-        
+
         if(isPackageInstalled("de.robv.android.xposed.installer", MainActivity.this)){
-        	SharedPreferences prefs = getPreferences(MODE_PRIVATE); 
+        	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         	Boolean restoredText = prefs.getBoolean("xposedWarned", false);
-        	if (!restoredText) 
+        	if (!restoredText)
         	{
         		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         		alertDialogBuilder.setTitle(R.string.xposedwarningTitle);
         	    alertDialogBuilder.setMessage(R.string.xposedwarningMessage);
-        	    alertDialogBuilder.setPositiveButton(R.string.positive_button, 
+        	    alertDialogBuilder.setPositiveButton(R.string.positive_button,
         	      new DialogInterface.OnClickListener() {
-        			
+
         	         @Override
         	         public void onClick(DialogInterface arg0, int arg1) {
         	        	 SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
@@ -279,11 +279,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         	}
         }
 	}
-	
+
 	public void setDownloadCallback(DownloadCallback downloadCallback) {
         mDownloadCallback = downloadCallback;
     }
-	
+
 	@Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -327,7 +327,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    
+
     public void checkUpdates() {
         mRomUpdater.check();
         mGappsUpdater.check();
@@ -540,7 +540,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             mCardsLayout.addView(card);
         }
     }
-    
+
     @Override
     public void onDownloadStarted() {
         if (mDownloadCallback != null) {
@@ -610,7 +610,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	@Override
 	public void versionFound(com.venturerom.venture.ota.updater.Updater.PackageInfo[] info, boolean isRom) {
 	}
-	
+
 	@Override
     public void onResponse(JSONObject response) {
 		if(response.has("notices")){
@@ -654,15 +654,15 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 		else if(response.has("changelog")){
 			//Add changelog code here
 		}
-		
-        
+
+
 	}
 
 	@Override
 	public void onErrorResponse(VolleyError error) {
 
 	}
-	
+
 	private boolean isPackageInstalled(String packagename, Context context) {
 	    PackageManager pm = context.getPackageManager();
 	    try {
@@ -673,4 +673,3 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 	    }
 	}
 }
-

@@ -7,11 +7,20 @@
     android:paddingRight="@dimen/card_horizontal_margin"
     android:id="@+id/llKernel"
     android:visibility="gone">
+<TextView
+          android:id="@+id/tvPerformanceDesc"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/card_text"
+    android:textSize="@dimen/card_small_text_size"
+    android:text="@string/performancedesc"
+          android:paddingBottom="@dimen/card_separator_padding"/>
 
 	<LinearLayout
     		android:layout_width="match_parent"
     		android:layout_height="match_parent"
-    		android:orientation="horizontal">
+    		android:orientation="horizontal"
+              android:paddingBottom="@dimen/card_separator_padding">
 
 		<TextView
         		android:id="@+id/tvPerformance"
@@ -23,7 +32,7 @@
 		<View
             		android:layout_width="0dp"
             		android:layout_height="0dp"
-            		android:layout_weight="1"/>           
+            		android:layout_weight="1"/>
 
     		<Switch
         		android:id="@+id/performance_enable"
@@ -31,14 +40,5 @@
         		android:layout_height="wrap_content"/>
 
 	</LinearLayout>
-
-	<TextView
-        		android:id="@+id/tvPerformanceDesc"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_small_text_size" 
-			android:text="@string/performancedesc"
-        		android:paddingBottom="@dimen/card_separator_padding"/>
 
 </LinearLayout>

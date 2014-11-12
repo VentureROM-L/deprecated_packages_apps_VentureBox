@@ -8,10 +8,20 @@
     android:id="@+id/llCardView"
     android:visibility="gone">
 
+<TextView
+          android:id="@+id/tvCardViewDesc"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/card_text"
+    android:textSize="@dimen/card_small_text_size"
+    android:text="@string/cardviewdesc"
+          android:paddingBottom="@dimen/card_separator_padding"/>
+
 	<LinearLayout
     		android:layout_width="match_parent"
     		android:layout_height="match_parent"
-    		android:orientation="horizontal">
+    		android:orientation="horizontal"
+              android:paddingBottom="@dimen/card_separator_padding">
 
 		<TextView
         		android:id="@+id/tvCardViewLabel"
@@ -23,7 +33,7 @@
 		<View
             		android:layout_width="0dp"
             		android:layout_height="0dp"
-            		android:layout_weight="1"/>           
+            		android:layout_weight="1"/>
 
     		<Switch
         		android:id="@+id/cardview_enable"
@@ -31,14 +41,5 @@
         		android:layout_height="wrap_content"/>
 
 	</LinearLayout>
-
-	<TextView
-        		android:id="@+id/tvCardViewDesc"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:textColor="@color/card_text"
-			android:textSize="@dimen/card_small_text_size" 
-			android:text="@string/cardviewdesc"
-        		android:paddingBottom="@dimen/card_separator_padding"/>
 
 </LinearLayout>

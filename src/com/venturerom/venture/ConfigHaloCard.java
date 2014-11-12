@@ -206,7 +206,7 @@ public class ConfigHaloCard extends Card {
         }
         if (hideSetting != null && Integer.valueOf(hideSetting) == 1) hideSwitch.setChecked(true);
         if (pauseSetting != null && Integer.valueOf(pauseSetting) == 1) pauseSwitch.setChecked(true);
-        if (msgboxSetting != null && Integer.valueOf(msgboxSetting) == 1) msgboxSwitch.setChecked(true);
+        if (msgboxSetting != null && Integer.valueOf(msgboxSetting) == 0) msgboxSwitch.setChecked(true);
         if (unlockPingSetting != null && Integer.valueOf(unlockPingSetting) == 0) unlockPingSwitch.setChecked(true);
 
         // All the cool kids set and create listeners at the same time
