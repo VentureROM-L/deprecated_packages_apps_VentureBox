@@ -32,6 +32,7 @@ public class ConfigNetworkTrafficCard extends Card{
 	private Spinner typeSpinner;
 	private Spinner refreshSpinner;
 	
+	//Masks to get settings
 	private int MASK_UP = 0x00000001;
     private int MASK_DOWN = 0x00000002;
     private int MASK_UNIT = 0x00000004;
@@ -136,21 +137,6 @@ public class ConfigNetworkTrafficCard extends Card{
                 Log.d(TAG, "Nothing was selected from " + parent.toString());
             }
         });
-        
-        Resources res = context.getResources();
-        /*
-        Switch switchEnable = (Switch) findLayoutViewById(R.id.cardview_enable);
-        switchEnable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            	Settings.System.putInt(getContext().getContentResolver(), "status_bar_recents_card_stack", isChecked ? 1 : 2);
-            }
-        });
-        if(Settings.System.getString(getContext().getContentResolver(), "status_bar_recents_card_stack") != null){
-        	if(Integer.valueOf(Settings.System.getString(getContext().getContentResolver(), "status_bar_recents_card_stack")) == 1){
-            	switchEnable.setChecked(true);
-            }
-        }
-                */
     }
 	
 	@Override
