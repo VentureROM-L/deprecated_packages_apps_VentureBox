@@ -101,4 +101,25 @@
         <item>4</item>
     </string-array>
     <!-- End HALO settings -->
+
+    <!-- Begin Network Traffic settings -->
+    <string-array name="networktraffic_state_array" translatable="false">
+       <item>@string/networktraffic_state_disabled</item>
+       <item>@string/networktraffic_state_outgoing</item>
+       <item>@string/networktraffic_state_incoming</item>
+       <item>@string/networktraffic_state_both</item>
+    </string-array>
+
+    <string-array name="networktraffic_type_array" translatable="false">
+        <item>@string/networktraffic_type_bits</item>
+        <item>@string/networktraffic_type_bytes</item>
+    </string-array>
+
+    <string-array name="networktraffic_refresh_array" translatable="false">
+        <item>@string/networktraffic_refresh_500</item>
+        <item>@string/networktraffic_refresh_1000</item>
+        <item>@string/networktraffic_refresh_1500</item>
+        <item>@string/networktraffic_refresh_2000</item>
+    </string-array>
+    <!-- End Network Traffic settings -->
 </resources>

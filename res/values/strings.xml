@@ -27,6 +27,7 @@
     <string name="config_cardview">Recents Card View</string>
     <string name="config_wifinoti">WiFi Notification</string>
     <string name="config_doubletap">Double Tap</string>
+    <string name="config_networktraffic">Network Traffic</string>
     <string name="config_performance">Performance Mode: </string>
     <string name="performancedesc">A special init.d mod that optimizes the kernel. [Disable if using other kernel mods that interfere with governors]</string>
     <string name="halolabel">Halo: </string>
@@ -62,6 +63,20 @@
     <string name="doubletapstatuslabel">Double Tap Statusbar to Sleep: </string>
     <string name="doubletapnavlabel">Double Tap Navbar to Sleep: </string>
     <string name="doubletapdesc">Double tap your status bar to quickly put your device to sleep</string>
+    <string name="networktraffic_state_disabled">Disabled</string>
+    <string name="networktraffic_state_outgoing">Outgoing</string>
+    <string name="networktraffic_state_incoming">Incoming</string>
+    <string name="networktraffic_state_both">Outgoing and incoming</string>
+    <string name="networktraffic_type_bits">Bits per second</string>
+    <string name="networktraffic_type_bytes">Bytes per second</string>
+    <string name="networktraffic_refresh_500">500 ms</string>
+    <string name="networktraffic_refresh_1000">1000 ms</string>
+    <string name="networktraffic_refresh_1500">1500 ms</string>
+    <string name="networktraffic_refresh_2000">2000 ms</string>
+    <string name="networktraffic_state_tv">State: </string>
+    <string name="networktraffic_type_tv">Display Format: </string>
+    <string name="networktraffic_refresh_tv">Refresh Rate: </string>
+    <string name="networktrafficdesc">Display current network traffic in statusbar.</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>

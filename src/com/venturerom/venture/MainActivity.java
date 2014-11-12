@@ -86,6 +86,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ConfigCardViewCard mConfigCardViewCard;
     private ConfigWifiNotiCard mConfigWifiNotiCard;
     private ConfigDoubleTapCard mConfigDoubleTapCard;
+    private ConfigNetworkTrafficCard mConfigNetworkTrafficCard;
     
     private static final String STATE = "STATE";
     
@@ -300,6 +301,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 mConfigCardViewCard.saveState(outState);
                 mConfigWifiNotiCard.saveState(outState);
                 mConfigDoubleTapCard.saveState(outState);
+                mConfigNetworkTrafficCard.saveState(outState);
                 break;
             case STATE_UPDATES:
                 mSystemCard.saveState(outState);
@@ -473,8 +475,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             	if (mConfigDoubleTapCard == null) {
                     mConfigDoubleTapCard = new ConfigDoubleTapCard(mContext, null,mSavedInstanceState);
             	}
+            	if (mConfigNetworkTrafficCard == null) {
+                    mConfigNetworkTrafficCard = new ConfigNetworkTrafficCard(mContext, null,mSavedInstanceState);
+            	}
             	addCards(new Card[] {
-                        mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard, mConfigDoubleTapCard
+                        mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
                 }, animate, true);
             	break;
             case STATE_UPDATES:
