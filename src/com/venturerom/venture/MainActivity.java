@@ -174,7 +174,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 } else {
 								    text.setText(item);
                     textSmall.setText(item);
-                //}
+                }
                 if (icons[position] != null) {
                     icon.setImageDrawable(icons[position]);
                     text.setVisibility(View.GONE);
