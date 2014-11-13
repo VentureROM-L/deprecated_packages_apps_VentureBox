@@ -1,0 +1,69 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/card_horizontal_margin"
+    android:paddingRight="@dimen/card_horizontal_margin"
+    android:id="@+id/llDoubleTap"
+    android:visibility="gone">
+
+    <TextView
+              android:id="@+id/tvdoubletapDesc"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/card_text"
+        android:textSize="@dimen/card_small_text_size"
+        android:text="@string/doubletapdesc"
+              android:paddingBottom="@dimen/card_separator_padding"/>
+
+	<LinearLayout
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:orientation="horizontal">
+
+		<TextView
+        		android:id="@+id/tvdoubletapstatusLabel"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size"/>
+
+		<View
+            		android:layout_width="0dp"
+            		android:layout_height="0dp"
+            		android:layout_weight="1"/>
+
+    		<Switch
+        		android:id="@+id/doubletapstatus_enable"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:orientation="horizontal"
+              android:paddingBottom="@dimen/card_separator_padding">
+
+		<TextView
+        		android:id="@+id/tvdoubletapnavLabel"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:textColor="@color/card_text"
+			android:textSize="@dimen/card_small_text_size"/>
+
+		<View
+            		android:layout_width="0dp"
+            		android:layout_height="0dp"
+            		android:layout_weight="1"/>
+
+    		<Switch
+        		android:id="@+id/doubletapnav_enable"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+</LinearLayout>
