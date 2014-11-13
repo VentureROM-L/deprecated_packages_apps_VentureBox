@@ -78,6 +78,11 @@
     <string name="networktraffic_refresh_tv">Refresh Rate: </string>
     <string name="networktrafficdesc">Display current network traffic in statusbar.</string>
 
+    <!-- Config -->
+    <string name="faq_title">FAQ</string>
+    <string name="faq_q_1">ETA?</string>
+    <string name="faq_a_1">¯\\_(ツ)_/¯</string>
+
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
     <string name="all_up_to_date">You\'re up to date!</string>

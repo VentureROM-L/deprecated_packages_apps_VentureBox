@@ -93,9 +93,10 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     public static final int STATE_HOME = 0;
     public static final int STATE_CHANGELOG = 1;
     public static final int STATE_CONFIG = 2;
-    public static final int STATE_UPDATES = 3;
-    public static final int STATE_DOWNLOAD = 4;
-    public static final int STATE_INSTALL = 5;
+    public static final int STATE_FAQ = 3;
+    public static final int STATE_UPDATES = 4;
+    public static final int STATE_DOWNLOAD = 5;
+    public static final int STATE_INSTALL = 6;
 
     private RomUpdater mRomUpdater;
     private GappsUpdater mGappsUpdater;
@@ -129,12 +130,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         List<String> itemText = new ArrayList<String>();
         itemText.add(res.getString(R.string.home));
         itemText.add(res.getString(R.string.config));
+        itemText.add(res.getString(R.string.faq_title));
         itemText.add(res.getString(R.string.updates));
         itemText.add(res.getString(R.string.install));
         itemText.add(res.getString(R.string.settings));
 
         final Drawable[] icons = new Drawable[] {
-                null, null, null, null, res.getDrawable(R.drawable.ic_settings)
+                null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
@@ -303,6 +305,8 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 mConfigDoubleTapCard.saveState(outState);
                 mConfigNetworkTrafficCard.saveState(outState);
                 break;
+            case STATE_FAQ:
+                break;
             case STATE_UPDATES:
                 mSystemCard.saveState(outState);
                 mUpdatesCard.saveState(outState);
@@ -351,20 +355,27 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 invalidateOptionsMenu();
                 break;
             case 2:
+                if (mState == STATE_FAQ) {
+                    break;
+                }
+                setState(STATE_FAQ, true, false);
+                invalidateOptionsMenu();
+                break;
+            case 3:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
                     break;
                 }
                 setState(STATE_UPDATES, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 3:
+            case 4:
                 if (mState == STATE_INSTALL) {
                     break;
                 }
                 setState(STATE_INSTALL, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 4:
+            case 5:
             	invalidateOptionsMenu();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -482,6 +493,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                         mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
                 }, animate, true);
             	break;
+            case STATE_FAQ:
+            	addCards(new Card[] {
+                        new FAQCard(mContext, null, mSavedInstanceState, mContext.getResources().getString(R.string.faq_q_1))
+                }, animate, true);
+            	break;
             case STATE_UPDATES:
                 if (mSystemCard == null) {
                     mSystemCard = new SystemCard(mContext, null, mRomUpdater, mGappsUpdater,
@@ -584,8 +600,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             case STATE_CHANGELOG:
                 mTitle.setText(R.string.changelog);
                 break;
-	   case STATE_CONFIG:
+            case STATE_CONFIG:
                 mTitle.setText(R.string.config);
+                break;
+            case STATE_FAQ:
+                mTitle.setText(R.string.faq_title);
                 break;
             case STATE_UPDATES:
                 mTitle.setText(R.string.updates);
