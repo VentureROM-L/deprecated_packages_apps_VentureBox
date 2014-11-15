@@ -83,7 +83,6 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ChangelogCard mChangelogCard;
     private ConfigKernelCard mConfigKernelCard;
     private ConfigHaloCard mConfigHaloCard;
-    private ConfigCardViewCard mConfigCardViewCard;
     private ConfigWifiNotiCard mConfigWifiNotiCard;
     private ConfigDoubleTapCard mConfigDoubleTapCard;
     private ConfigNetworkTrafficCard mConfigNetworkTrafficCard;
@@ -300,7 +299,6 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             case STATE_CONFIG:
                 mConfigKernelCard.saveState(outState);
                 mConfigHaloCard.saveState(outState);
-                mConfigCardViewCard.saveState(outState);
                 mConfigWifiNotiCard.saveState(outState);
                 mConfigDoubleTapCard.saveState(outState);
                 mConfigNetworkTrafficCard.saveState(outState);
@@ -477,9 +475,6 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             	if (mConfigHaloCard == null) {
                     mConfigHaloCard = new ConfigHaloCard(mContext, null,mSavedInstanceState);
             	}
-            	if (mConfigCardViewCard == null) {
-                    mConfigCardViewCard = new ConfigCardViewCard(mContext, null,mSavedInstanceState);
-            	}
             	if (mConfigWifiNotiCard == null) {
                     mConfigWifiNotiCard = new ConfigWifiNotiCard(mContext, null,mSavedInstanceState);
             	}
@@ -490,7 +485,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                     mConfigNetworkTrafficCard = new ConfigNetworkTrafficCard(mContext, null,mSavedInstanceState);
             	}
             	addCards(new Card[] {
-                        mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
+                        mConfigKernelCard, mConfigHaloCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
                 }, animate, true);
             	break;
             case STATE_FAQ:
