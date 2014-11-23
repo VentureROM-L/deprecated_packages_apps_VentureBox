@@ -1,6 +1,7 @@
 package com.venturerom.venture;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -65,6 +66,10 @@ import com.venturerom.venture.ota.updater.Updater.UpdaterListener;
 import com.venturerom.venture.widget.Card;
 import com.venturerom.venture.ota.Utils;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
+
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
 OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 
@@ -96,6 +101,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     public static final int STATE_UPDATES = 4;
     public static final int STATE_DOWNLOAD = 5;
     public static final int STATE_INSTALL = 6;
+    public static final int STATE_CONTACT = 7;
 
     private RomUpdater mRomUpdater;
     private GappsUpdater mGappsUpdater;
@@ -109,6 +115,8 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private RequestQueue mQueue;
 
     private int mState = STATE_HOME;
+    
+    private EasyTracker easyTracker = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +126,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 		mContext = this;
         mSavedInstanceState = savedInstanceState;
         mQueue = Volley.newRequestQueue(this);
+        easyTracker = EasyTracker.getInstance(MainActivity.this);
 
         setContentView(R.layout.activity_main);
 
@@ -132,10 +141,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         itemText.add(res.getString(R.string.faq_title));
         itemText.add(res.getString(R.string.updates));
         itemText.add(res.getString(R.string.install));
+        itemText.add(res.getString(R.string.contact));
         itemText.add(res.getString(R.string.settings));
 
         final Drawable[] icons = new Drawable[] {
-                null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
+                null, null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
@@ -374,6 +384,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 invalidateOptionsMenu();
                 break;
             case 5:
+                if (mState == STATE_CONTACT) {
+                    break;
+                }
+                setState(STATE_CONTACT, true, false);
+                invalidateOptionsMenu();
+                break;
+            case 6:
             	invalidateOptionsMenu();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -394,6 +411,18 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             }
         }
     }
+    
+    @Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);
+	}
 
     @Override
     protected void onResume() {
@@ -534,6 +563,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                     mInstallCard.addFile(uri, md5);
                 }
                 break;
+            case STATE_CONTACT:
+                addCards(new Card[] {
+                		new ContactCard(mContext, null,mSavedInstanceState, "Feedback", "chris@venturerom.com"),
+                		new ContactCard(mContext, null,mSavedInstanceState, "Feature Requests", "jacob@venturerom.com"),
+                		new ContactCard(mContext, null,mSavedInstanceState, "Bugs", "vedant@venturerom.com")
+                }, animate, true);
+                break;
         }
         ((ArrayAdapter<String>) mDrawerList.getAdapter()).notifyDataSetChanged();
         updateTitle();
@@ -606,6 +642,9 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 break;
             case STATE_INSTALL:
                 mTitle.setText(R.string.install);
+                break;
+            case STATE_CONTACT:
+                mTitle.setText(R.string.contact);
                 break;
         }
     }

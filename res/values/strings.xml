@@ -80,6 +80,9 @@
     <string name="faq_q_1">ETA?</string>
     <string name="faq_a_1">¯\\_(ツ)_/¯</string>
 
+    <!-- Contact -->
+    <string name="contact">Contact</string>
+
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>
     <string name="all_up_to_date">You\'re up to date!</string>
