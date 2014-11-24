@@ -24,7 +24,6 @@
     <string name="config">Configuration</string>
     <string name="config_kernel">Kernel</string>
     <string name="config_halo">Halo</string>
-    <string name="config_cardview">Recents Card View</string>
     <string name="config_wifinoti">WiFi Notification</string>
     <string name="config_doubletap">Double Tap</string>
     <string name="config_networktraffic">Network Traffic</string>
@@ -52,8 +51,6 @@
     <string name="halo_msgbox_tv">Show notification text</string>
     <string name="halo_notify_count_tv">Notification counter type</string>
     <string name="halo_unlock_ping_tv">Ping new notifications on unlock</string>
-    <string name="cardviewlabel">Card View: </string>
-    <string name="cardviewdesc">A quick and easy toggle for AOSPA\'s new card view</string>
     <string name="wifinotilabel">WiFi Notifications: </string>
     <string name="wifinotidesc">Get an alert every time you connect to wifi</string>
     <string name="wifinotidisabled">Disabled</string>
@@ -77,6 +74,14 @@
     <string name="networktraffic_type_tv">Display Format: </string>
     <string name="networktraffic_refresh_tv">Refresh Rate: </string>
     <string name="networktrafficdesc">Display current network traffic in statusbar.</string>
+
+    <!-- Config -->
+    <string name="faq_title">FAQ</string>
+    <string name="faq_q_1">ETA?</string>
+    <string name="faq_a_1">¯\\_(ツ)_/¯</string>
+
+    <!-- Contact -->
+    <string name="contact">Contact</string>
 
     <!-- SYSTEM ACTIVITY -->
     <string name="check_for_updates_long">Check for updates</string>

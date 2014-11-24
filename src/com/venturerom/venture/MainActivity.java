@@ -1,6 +1,7 @@
 package com.venturerom.venture;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -65,6 +66,10 @@ import com.venturerom.venture.ota.updater.Updater.UpdaterListener;
 import com.venturerom.venture.widget.Card;
 import com.venturerom.venture.ota.Utils;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
+
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
 OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 
@@ -83,7 +88,6 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ChangelogCard mChangelogCard;
     private ConfigKernelCard mConfigKernelCard;
     private ConfigHaloCard mConfigHaloCard;
-    private ConfigCardViewCard mConfigCardViewCard;
     private ConfigWifiNotiCard mConfigWifiNotiCard;
     private ConfigDoubleTapCard mConfigDoubleTapCard;
     private ConfigNetworkTrafficCard mConfigNetworkTrafficCard;
@@ -93,9 +97,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     public static final int STATE_HOME = 0;
     public static final int STATE_CHANGELOG = 1;
     public static final int STATE_CONFIG = 2;
-    public static final int STATE_UPDATES = 3;
-    public static final int STATE_DOWNLOAD = 4;
-    public static final int STATE_INSTALL = 5;
+    public static final int STATE_FAQ = 3;
+    public static final int STATE_UPDATES = 4;
+    public static final int STATE_DOWNLOAD = 5;
+    public static final int STATE_INSTALL = 6;
+    public static final int STATE_CONTACT = 7;
 
     private RomUpdater mRomUpdater;
     private GappsUpdater mGappsUpdater;
@@ -109,6 +115,8 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private RequestQueue mQueue;
 
     private int mState = STATE_HOME;
+    
+    private EasyTracker easyTracker = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +126,7 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
 		mContext = this;
         mSavedInstanceState = savedInstanceState;
         mQueue = Volley.newRequestQueue(this);
+        easyTracker = EasyTracker.getInstance(MainActivity.this);
 
         setContentView(R.layout.activity_main);
 
@@ -129,12 +138,14 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
         List<String> itemText = new ArrayList<String>();
         itemText.add(res.getString(R.string.home));
         itemText.add(res.getString(R.string.config));
+        itemText.add(res.getString(R.string.faq_title));
         itemText.add(res.getString(R.string.updates));
         itemText.add(res.getString(R.string.install));
+        itemText.add(res.getString(R.string.contact));
         itemText.add(res.getString(R.string.settings));
 
         final Drawable[] icons = new Drawable[] {
-                null, null, null, null, res.getDrawable(R.drawable.ic_settings)
+                null, null, null, null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
@@ -298,10 +309,11 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             case STATE_CONFIG:
                 mConfigKernelCard.saveState(outState);
                 mConfigHaloCard.saveState(outState);
-                mConfigCardViewCard.saveState(outState);
                 mConfigWifiNotiCard.saveState(outState);
                 mConfigDoubleTapCard.saveState(outState);
                 mConfigNetworkTrafficCard.saveState(outState);
+                break;
+            case STATE_FAQ:
                 break;
             case STATE_UPDATES:
                 mSystemCard.saveState(outState);
@@ -351,20 +363,34 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 invalidateOptionsMenu();
                 break;
             case 2:
+                if (mState == STATE_FAQ) {
+                    break;
+                }
+                setState(STATE_FAQ, true, false);
+                invalidateOptionsMenu();
+                break;
+            case 3:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
                     break;
                 }
                 setState(STATE_UPDATES, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 3:
+            case 4:
                 if (mState == STATE_INSTALL) {
                     break;
                 }
                 setState(STATE_INSTALL, true, false);
                 invalidateOptionsMenu();
                 break;
-            case 4:
+            case 5:
+                if (mState == STATE_CONTACT) {
+                    break;
+                }
+                setState(STATE_CONTACT, true, false);
+                invalidateOptionsMenu();
+                break;
+            case 6:
             	invalidateOptionsMenu();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -385,6 +411,18 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             }
         }
     }
+    
+    @Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);
+	}
 
     @Override
     protected void onResume() {
@@ -466,9 +504,6 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             	if (mConfigHaloCard == null) {
                     mConfigHaloCard = new ConfigHaloCard(mContext, null,mSavedInstanceState);
             	}
-            	if (mConfigCardViewCard == null) {
-                    mConfigCardViewCard = new ConfigCardViewCard(mContext, null,mSavedInstanceState);
-            	}
             	if (mConfigWifiNotiCard == null) {
                     mConfigWifiNotiCard = new ConfigWifiNotiCard(mContext, null,mSavedInstanceState);
             	}
@@ -479,7 +514,12 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                     mConfigNetworkTrafficCard = new ConfigNetworkTrafficCard(mContext, null,mSavedInstanceState);
             	}
             	addCards(new Card[] {
-                        mConfigKernelCard, mConfigHaloCard, mConfigCardViewCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
+                        mConfigKernelCard, mConfigHaloCard, mConfigWifiNotiCard, mConfigDoubleTapCard, mConfigNetworkTrafficCard
+                }, animate, true);
+            	break;
+            case STATE_FAQ:
+            	addCards(new Card[] {
+                        new FAQCard(mContext, null, mSavedInstanceState, mContext.getResources().getString(R.string.faq_q_1))
                 }, animate, true);
             	break;
             case STATE_UPDATES:
@@ -522,6 +562,13 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
                 if (uri != null) {
                     mInstallCard.addFile(uri, md5);
                 }
+                break;
+            case STATE_CONTACT:
+                addCards(new Card[] {
+                		new ContactCard(mContext, null,mSavedInstanceState, "Feedback", "chris@venturerom.com"),
+                		new ContactCard(mContext, null,mSavedInstanceState, "Feature Requests", "jacob@venturerom.com"),
+                		new ContactCard(mContext, null,mSavedInstanceState, "Bugs", "vedant@venturerom.com")
+                }, animate, true);
                 break;
         }
         ((ArrayAdapter<String>) mDrawerList.getAdapter()).notifyDataSetChanged();
@@ -584,14 +631,20 @@ OnItemClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
             case STATE_CHANGELOG:
                 mTitle.setText(R.string.changelog);
                 break;
-	   case STATE_CONFIG:
+            case STATE_CONFIG:
                 mTitle.setText(R.string.config);
+                break;
+            case STATE_FAQ:
+                mTitle.setText(R.string.faq_title);
                 break;
             case STATE_UPDATES:
                 mTitle.setText(R.string.updates);
                 break;
             case STATE_INSTALL:
                 mTitle.setText(R.string.install);
+                break;
+            case STATE_CONTACT:
+                mTitle.setText(R.string.contact);
                 break;
         }
     }
