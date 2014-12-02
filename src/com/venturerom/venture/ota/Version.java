@@ -72,7 +72,7 @@ public class Version implements Serializable {
     }
 
     public Version(String fileName, boolean GAPPS) {
-
+    	/*
         for (String remove : STATIC_REMOVE) {
             fileName = fileName.replace(remove, "");
         }
@@ -180,6 +180,7 @@ public class Version implements Serializable {
         		ex.printStackTrace();
         	}
         }
+        */
     }
 
     public String getDevice() {
