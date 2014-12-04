@@ -21,6 +21,9 @@ package com.venturerom.venture.ota;
 
 import java.io.Serializable;
 
+import android.util.Log;
+import android.widget.Toast;
+
 /**
  * Class to manage different versions in the zip name.
  * <p>
@@ -72,7 +75,6 @@ public class Version implements Serializable {
     }
 
     public Version(String fileName, boolean GAPPS) {
-    	/*
         for (String remove : STATIC_REMOVE) {
             fileName = fileName.replace(remove, "");
         }
@@ -155,32 +157,36 @@ public class Version implements Serializable {
         } else {
         	try {
         		String version = split[1];
+        		version = version.replace("hammerhead_", "");
         		int index = -1;
         		if ((index = version.indexOf(".")) > 0) {
         			mMajor = Integer.parseInt(version.substring(0, index));
         			version = version.substring(index + 1);
         			if (version.length() > 0) {
-        				mMinor = Integer.parseInt(version.substring(0, 2));
+        				mMinor = Integer.parseInt(version.substring(0, 1));
+        				mMaintenance = Integer.parseInt(version.substring(2, 3));
         			}
         		} else {
         			mMajor = Integer.parseInt(version);
         		}
-
+        		mDate = version.split("_")[1];
+        		/*
         		if (!Utils.isNumeric(split[2].substring(0, 1))) {
         			version = split[2];
         			mPhase = 2;
-        			mPhaseNumber = Integer.parseInt(version.replace("R", ""));
+        			mPhaseNumber = Integer.parseInt(version.replace("RELEASE", ""));
         			mDate = split[3];
         		} else {
         			mDate = split[2];
         		}
+        		*/
         	} catch (NumberFormatException ex) {
         		// malformed version, write the log and continue
         		// C derped something for sure
         		ex.printStackTrace();
         	}
         }
-        */
+        
     }
 
     public String getDevice() {
@@ -228,8 +234,8 @@ public class Version implements Serializable {
                 + mMajor
                 + "."
                 + mMinor
-                + (mMaintenance > 0 ? "."
-                        + mMaintenance : "")
+                + "."
+                + mMaintenance
                 + (mPhase != GOLD ? " " + getPhaseName() + mPhaseNumber : "")
                 + " (" + mDate + ")";
     }
